@@ -30,9 +30,9 @@ A shell does three main things in its lifetime.
 
 So we’ve taken care of how the program should start up. Now, for the basic program logic: what does the shell do during its loop? Well, a simple way to handle commands is with three steps:
 
-Read: Read the command from standard input.
-Parse: Separate the command string into a program and arguments.
-Execute: Run the parsed command.
+	*	Read: Read the command from standard input.
+	*	Parse: Separate the command string into a program and arguments.
+	*	Execute: Run the parsed command.
 
 ##  Prerequisites
 
