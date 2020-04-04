@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-size_t _getline(char **lineptr, size_t *bufsize, FILE *stream);
+ssize_t _getline(char **lineptr, size_t *n, STDIN_FILENO);
+
 
 #endif

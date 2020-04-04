@@ -13,17 +13,20 @@
  * Return: Always 0.
  */
 
-size_t _getline(char **lineptr, size_t *bufsize, FILE *stdin)
+ssize_t _getline(char **lineptr, size_t *n, STDIN_FILENO)
 {
 	ssize_t i = 0, character;
 
 	/*if *lineptr is NULL, then getline() will allocate a buffer
 	for storing the line, which should be freed by the user program.*/
-	*lineptr = malloc(sizeof(char) * BUFF_SIZE);
-	if (!lineptr)
+	if (*lineptr == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: Allocation error\n");
-		exit(1);
+		*lineptr = malloc(sizeof(char) * BUFF_SIZE);
+		if (!lineptr)
+		{
+			dprintf(STDERR_FILENO, "Error: Allocation error\n");
+			exit(1);
+		}
 	}
 	do
 	{
@@ -59,6 +62,6 @@ size_t _getline(char **lineptr, size_t *bufsize, FILE *stdin)
 			}
 		}
 		/*we want to have a infinite loop, so that is why we ask something obvious*/
-	} while (BUFF_SIZE == 1024);
+	} while (1);
 	return (character);
 }
