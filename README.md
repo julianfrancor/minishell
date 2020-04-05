@@ -31,11 +31,11 @@ A shell does three main things in its lifetime.
 ```
 ## Basic loop of a shell
 
-The basic logic of the program, the shell loop, that handle commands in three steps:
+The basic logic of the program: the shell has a loop that handle commands in three steps:
 
 	*	Read: Read the command from standard input. (getline())
 	*	Parse: Separate the command string into a program and arguments. (strtok())
-	*	Execute: Run the parsed command. (fork () & execve ())
+	*	Execute: Run the parsed command. (fork() & execve())
 
 
 ##  Prerequisites
