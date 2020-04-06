@@ -7,8 +7,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-
 /**
  * main - Shell function
  *
@@ -21,34 +19,57 @@ int main(void)
 	ssize_t characters_read;
 	pid_t pid;
 
-	/*Printing our prompt*/
-	printf("$ ");
-	/*Using getline() to get whatever the user typed*/
-	characters_read = getline(&buffer, &n, stdin);
-	/*Checking is we read the line right*/
-	if (characters_read == -1)
+	while (1)
 	{
-		perror("Error: Bad arguments in getline() function");
-		exit(EXIT_FAILURE);
+		/*Printing our prompt*/
+		printf("$ ");
+		buffer = (char *)malloc(n);
+		if (!buffer)
+		{
+			free(buffer);
+			continue;
+		}
+		/*Using getline() to get whatever the user typed*/
+		characters_read = getline(&buffer, &n, stdin);
+		/*Checking is we read the line right*/
+		if (characters_read == -1)
+		{
+			perror("Error: Bad arguments in getline() function");
+			exit(EXIT_FAILURE);
+		}
+		token = strtok(buffer, "\n");
+
+		if (token == NULL)
+		{
+			continue;
+			perror("Error: Error parsing Oscar esta dormido the tokens");
+			exit(EXIT_FAILURE);
+		}
+		/*We will start a Child process with Fork*/
+		pid = fork();
+		/*to check error forking*/
+		if (pid == -1)
+		{
+			perror("Error: No child process was created");
+			exit(EXIT_FAILURE);
+		}
+		/*Child process*/
+		else if (pid == 0)
+		{
+			if (execve(token, argv, NULL) == -1)
+			{
+				perror("Error: Execution error");
+			}
+			exit(0);
+
+		}
+		/*Parent process*/
+		else
+		{
+			wait(NULL);
+		}
+
+		free(buffer);
 	}
-	/*We will start a Child process with Fork*/
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("Error: No child process was created");
-		exit(EXIT_FAILURE);
-	}
-	token = strtok(buffer, " \n");
-	if (token == NULL)
-	{
-		perror("Error: Error parsing the tokens");
-		exit(EXIT_FAILURE);
-	}
-	if (execve(token, argv, NULL) == -1)
-	{
-		perror("Error: Execution error");
-		exit(EXIT_FAILURE);
-	}
-	free(buffer);
 	return(0);
 }
