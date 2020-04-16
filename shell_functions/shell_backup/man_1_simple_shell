@@ -1,0 +1,76 @@
+.TH SIMPLE_SHELL 1
+.SH NAME
+Simple_Shell - program designed to read commands typed by a user and execute appropriate programs in response to those commands.
+.SH SYNOPSIS
+\fBint Simple_Shell [options] [command_string | file]\fR
+
+.SH DESCRIPTION
+\fB Simple_Shell\fR is an sh-compatible command language interpreter  that  executes  commands  read  from the
+standard input or from a file.  Bash also incorporates  useful  features  from  the  Korn and shells (ksh and csh).
+
+\fB Simple_Shell\fR is intended to be a conformant  implementation  of  the Shell and Utilities portion of the
+IEEE POSIX specification (IEEE Standard 1003.1). Bash can be configured to be POSIX-conformant by default.
+
+.SH OPTIONS
+All of the  single-character shell options documented  in  the  description  of the set builtin command can be used
+as options when the shell is invoked. In addition, bash interprets the following options when it is invoked:
+
+WE GONNA PUT ALL THE BUILTIN FUNCTIONS DOWN BELLOW ------->
+
+.RE
+
+.B The Conversion Specifier
+.RS 3
+The following characters are what \fB_printf()\fR is able to print.
+
+.B i, d
+.RS 6
+The \fIint\fR argument is signed decimal notation.
+.RE
+
+.B c
+.RS 6
+The \fIint\fR argument is converted to char, and the resulting character is printed by the function.
+.RE
+
+.B s
+.RS 6
+The \fIconst char *\fR argument is expected to be a pointer to an array of character type (pointer to a string).  Characters from the array are written.
+.RE
+
+.B r
+.RS 6
+The \fIconst char *\fR argument is expected to be a pointer to an array of character type. Characters from the array are written in reverse
+.RE
+
+.SH EXAMPLE
+.RS 3
+Print a sentence using conversion specifiers:
+.RE
+
+.RS 8
+#include "holberton.h"
+.br
+int main (void)
+.br
+{
+.br
+.RS 8
+_printf("%s" "implicit declaration of main function");
+.br
+return (0);
+.RE
+.br
+}
+.RE
+
+.RS 1
+Output : "implicit declaration of main function"
+.RE
+
+.SH SEE ALSO
+.B Simple_Shell(1)
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Julian Franco & Oscar Henao
